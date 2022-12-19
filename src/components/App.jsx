@@ -19,7 +19,7 @@ export class App extends React.Component {
     filter: '',
   };
 
-  onAddBtnClick = (name, number) => {
+  onAddBtnClick = ({name, number}) => {
     const includesName = this.state.contacts.find(
       contact => contact.name.toLocaleLowerCase() === name.toLocaleLowerCase()
     );

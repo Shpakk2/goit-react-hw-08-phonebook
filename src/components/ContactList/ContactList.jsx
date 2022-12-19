@@ -21,4 +21,5 @@ ContactList.propTypes = {
       number: PropTypes.string.isRequired,
     })
   ).isRequired,
+  onDeleteBtnClick: PropTypes.func.isRequired
 };
