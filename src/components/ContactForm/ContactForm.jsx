@@ -24,7 +24,7 @@ export class ContactForm extends React.Component {
     render() {
         return (
         <form className={css.form} onSubmit={this.handleSubmit}>
-            <label >Name
+            <label >Insert Name
                     <input
                     onChange={this.onInputChange}
                     value={this.state.name}
@@ -36,7 +36,7 @@ export class ContactForm extends React.Component {
                     required
                     />
             </label>
-            <label>Number
+            <label>Insert Number
                     <input className={css.input}
                     onChange={this.onInputChange}
                     value={this.state.number}
