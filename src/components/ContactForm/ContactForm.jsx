@@ -1,15 +1,18 @@
-import {useState } from "react"
-import PropTypes from 'prop-types';
+import { useState } from "react"
+import { useDispatch } from 'react-redux';
+import { addContact } from "../../redux/contactsSlice"
 import css from 'components/ContactForm/ContactForm.module.css'
 
 
-export const ContactForm = ({onAddBtnClick}) => {
+export const ContactForm = () => {
     const [name, setName] = useState('')
     const [number, setNumber] = useState('')
 
+    const dispatch = useDispatch()
+
     const handleSubmit = e => {
         e.preventDefault()
-        onAddBtnClick({name, number})
+        dispatch(addContact({name, number}))
         e.target.reset()
     }
   
@@ -107,7 +110,3 @@ export const ContactForm = ({onAddBtnClick}) => {
 //         )
 //     }
 // }
-
-ContactForm.propTypes = {
-  onAddBtnClick: PropTypes.func.isRequired,
-};
