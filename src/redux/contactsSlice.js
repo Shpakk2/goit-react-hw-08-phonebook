@@ -1,17 +1,71 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { nanoid } from "nanoid";
+import { fetchContacts, addContact, deleteContact } from "./operations";
 
-const contactsArray = [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ]
+
 
 export const contactsSlice = createSlice({
     name: "contacts",
-    initialState: contactsArray,
-    reducers: {
+    initialState: {
+        items: [],
+        isLoading: false,
+        error: null},
+    extraReducers: (builder) => {
+        builder.addCase(
+            fetchContacts.pending, (state) => {
+                state.isLoading = true;
+                state.error = null
+            }
+        ).addCase(
+            fetchContacts.fulfilled, (state, { payload }) => {
+                state.isLoading = false;
+                state.items = payload
+                console.log(state.items)
+            }
+        ).addCase(
+            fetchContacts.rejected, (state, { payload }) => {
+                state.isLoading = false;
+                state.error = payload;
+            }
+        ).addCase(
+            addContact.pending, (state) => {
+                state.isLoading = true;
+                state.error = null
+            }
+        ).addCase(
+            addContact.fulfilled, (state, { payload }) => {
+                console.log(payload)
+                state.isLoading = false;
+                state.items.push(payload);                
+            }
+        ).addCase(
+            addContact.rejected, (state, { payload }) => {
+                state.isLoading = false;
+                state.error = payload;
+            }
+        ).addCase(
+            deleteContact.pending, (state) => {
+                state.isLoading = true;
+                state.error = null
+            }
+        ).addCase(
+            deleteContact.fulfilled, (state, { payload }) => {
+                console.log(payload)
+                state.isLoading = false;
+                state.items = state.items.filter(contact => contact.id !== payload.id
+      );
+            }
+        ).addCase(
+            deleteContact.rejected, (state, { payload }) => {
+                state.isLoading = false;
+                state.error = payload;
+            }
+        )
+    }
+
+})
+
+
+/*{
         addContact: (state, { payload }) => {
             const { name, number } = payload
             const id = nanoid()
@@ -32,8 +86,4 @@ export const contactsSlice = createSlice({
             return state.filter(contact => contact.id !== id)
         }
         
-    }
-
-})
-
-export const { addContact, removeContact } = contactsSlice.actions;
+    } */
