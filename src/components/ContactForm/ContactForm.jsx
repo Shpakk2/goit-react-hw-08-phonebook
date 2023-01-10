@@ -13,7 +13,6 @@ export const ContactForm = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        console.log(name, number, contacts)
         const includesName = contacts.find(contact => contact.name.toLocaleLowerCase() === name.toLocaleLowerCase())
 
         if (includesName) {
