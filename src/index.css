@@ -7,9 +7,28 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('https://wallpapercave.com/wp/wp2539590.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+a {
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  border-color: yellowgreen;
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
+a.active {
+  border-color: yellowgreen;
+  color: yellowgreen;
+  background-color: rgba(240, 241, 202, 0.7);
 }

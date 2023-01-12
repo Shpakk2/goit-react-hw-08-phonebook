@@ -1,18 +1,38 @@
 import css from 'components/App.module.css'
-import { ContactForm } from './ContactForm/ContactForm';
-import { Filter } from './Filter/Filter';
-import { ContactList } from './ContactList/ContactList';
+
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getCurrentUser } from 'redux/operations';
+import { Header } from './Header/Header';
+import { PrivateRoute } from './Routes/PrivateRoute';
+import { PublicRoute } from './Routes/PublicRoute';
+import { lazy } from 'react';
+
+const Home = lazy(() => import('../pages/Home/Home'));
+const Login = lazy(() => import('../pages/Login/Login'));
+const Register = lazy(() => import('../pages/Register/Register'));
+const Contacts = lazy(() => import('../pages/Contacts/Contacts'));
+
+
 
 export const App = () => {
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, [dispatch]);
 
   return (
-    <div className={css.container}>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      <Filter />
-      <ContactList />
-    </div>
+    <Routes>
+        <Route path='/' element={<Header />}>
+          <Route index element={<PublicRoute> <Home /> </PublicRoute>} />
+          <Route path="register" element={<PublicRoute restricted><Register /></PublicRoute>} />
+        <Route path="login" element={<PublicRoute restricted> <Login /> </PublicRoute>} />
+        <Route path="contacts" element={<PrivateRoute> <Contacts /> </PrivateRoute>} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Route>
+    </Routes>
 )
 
 }    

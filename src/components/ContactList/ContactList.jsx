@@ -25,7 +25,7 @@ export const ContactList = () => {
         <ul>
             {filteredContacts.map(contact => {
         return (
-            <li key={contact.id} className={css.item}> <p>{contact.name}: {contact.phone}</p> <button className={css.btn} onClick={() => dispatch(deleteContact(contact.id))}>Delete</button> </li>
+            <li key={contact.id} className={css.item}> <p>{contact.name}: {contact.number}</p> <button className={css.btn} onClick={() => dispatch(deleteContact(contact.id))}>Delete</button> </li>
         )
       })}
         </ul>
