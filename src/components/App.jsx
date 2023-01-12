@@ -1,4 +1,3 @@
-import css from 'components/App.module.css'
 
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
